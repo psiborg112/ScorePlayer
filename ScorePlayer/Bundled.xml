@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE opus SYSTEM "opus.dtd">
+<opus>
+	<score>
+		<name>Longing</name>
+		<composer>Cat Hope</composer>
+		<type>ScrollScore</type>
+		<duration>240</duration>
+		<startoffset>900</startoffset>
+		<filename>longingVoiceDraft4.png</filename>
+	</score>
+	<score>
+		<name>Juanita Neilsen</name>
+		<composer>Cat Hope</composer>
+		<type>ScrollScore</type>
+		<duration>660</duration>
+		<startoffset>1050</startoffset>
+		<readoffset>-50</readoffset>
+		<filename>JuanitaNeilsenScore.png</filename>
+		<prefsfile>juanitaprefs.xml</prefsfile>
+		<part>JuanitaNeilsenViola1.png</part>
+		<part>JuanitaNeilsenViola2.png</part>
+		<part>JuanitaNeilsenCello1.png</part>
+		<part>JuanitaNeilsenCello2.png</part>
+		<part>JuanitaNeilsenPiano.png</part>
+		<part>JuanitaNeilsenGuitar.png</part>
+	</score>
+	<score>
+		<name>Agilus</name>
+		<composer>Lindsay Vickery</composer>
+		<type>ScrollScore</type>
+		<duration>500</duration>
+		<startoffset>100</startoffset>
+		<readoffset>-50</readoffset>
+		<filename>Agilus_1.jpg</filename>
+		<prefsfile>agilusprefs.xml</prefsfile>
+		<instructions>AgilusInstructions.png</instructions>
+		<part>AgilusVI_1.jpg</part>
+		<part>AgilusVII_1.jpg</part>
+		<part>AgilusViola_1.jpg</part>
+		<part>AgilusCello_1.jpg</part>
+	</score>
+	<score>
+		<name>Liminum</name>
+		<composer>Cat Hope</composer>
+		<type>ScrollScore</type>
+		<duration>420</duration>
+		<startoffset>900</startoffset>
+		<readoffset>-50</readoffset>
+		<filename>liminum.png</filename>
+		<prefsfile>liminumprefs.xml</prefsfile>
+	</score>
+	<score>
+		<name>silent revolution</name>
+		<composer>Lindsay Vickery</composer>
+		<type>ScrollScore</type>
+		<duration>570</duration>
+		<filename>SRSC_1.jpg</filename>
+		<prefsfile>srprefs.xml</prefsfile>
+		<instructions>SRinstructions.png</instructions>
+		<part>SRVA_1.jpg</part>
+		<part>SRVC_1.jpg</part>
+		<part>SRDB_1.jpg</part>
+		<part>SREL_1.jpg</part>
+	</score>
+    <score>
+        <name>Her Pockets Full of Inertia (solo)</name>
+        <composer>Cat Hope</composer>
+        <type>ScrollScore</type>
+        <duration>414</duration>
+        <startoffset>158</startoffset>
+        <readoffset>180</readoffset>
+        <filename>HPFOI_soloAndScore.png</filename>
+        <instructions>HPFOI_instructions.png</instructions>
+        <audiofile>HPFOI_stereoMixNoSoloFlute.m4a</audiofile>
+        <part>HPFOI_solo.png</part>
+        <part>HPFOI_choir.png</part>
+        <part>HPFOI_cFlute.png</part>
+        <part>HPFOI_alto.png</part>
+        <part>HPFOI_bass.png</part>
+        <part>HPFOI_subcontra.png</part>
+    </score>
+	<score>
+		<name>Big Clock</name>
+		<composer>Clock</composer>
+		<type>BigClock</type>
+		<duration>600</duration>
+        <instructions>BigClock.png</instructions>
+	</score>
+</opus>

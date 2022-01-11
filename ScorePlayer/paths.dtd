@@ -1,0 +1,29 @@
+<!ELEMENT paths (width?, height?, bidirectional?, path+, trains?, mosaic, overlay?, background?, fadelayer?)>
+<!ELEMENT width (#PCDATA)>
+<!ELEMENT height (#PCDATA)>
+<!ELEMENT bidirectional (#PCDATA)>
+<!ELEMENT path (x, y, stop, invert?, endzone?)>
+<!ELEMENT x (#PCDATA)>
+<!ELEMENT y (#PCDATA)>
+<!ELEMENT stop (#PCDATA)>
+<!ELEMENT invert (#PCDATA)>
+<!ELEMENT endzone (#PCDATA)>
+<!ELEMENT trains (train+)>
+<!ELEMENT train (pathnumber, partnumber, stoptime, junctiontime, speed, rgb)>
+<!ELEMENT pathnumber (#PCDATA)>
+<!ELEMENT partnumber (#PCDATA)>
+<!ELEMENT stoptime (#PCDATA)>
+<!ELEMENT junctiontime (#PCDATA)>
+<!ELEMENT speed (#PCDATA)>
+<!ELEMENT rgb (#PCDATA)>
+<!ELEMENT mosaic (startimage, endimage, finalimage, duration)>
+<!ELEMENT startimage (#PCDATA)>
+<!ELEMENT endimage (#PCDATA)>
+<!ELEMENT finalimage (#PCDATA)>
+<!ELEMENT duration (#PCDATA)>
+<!ELEMENT overlay (image, xoffset?, yoffset?)>
+<!ELEMENT background (image, xoffset?, yoffset?)>
+<!ELEMENT fadelayer (image, xoffset?, yoffset?)>
+<!ELEMENT image (#PCDATA)>
+<!ELEMENT xoffset (#PCDATA)>
+<!ELEMENT yoffset (#PCDATA)>

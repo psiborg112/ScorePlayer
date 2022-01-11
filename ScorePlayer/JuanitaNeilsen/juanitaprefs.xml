@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE advancedscroller SYSTEM "advancedscroller.dtd">
+<advancedscroller>
+	<juanitamode>
+		<middleduration>60</middleduration>
+		<minfragment>3</minfragment>
+		<maxfragment>6</maxfragment>
+		<minspeed>2</minspeed>
+		<maxspeed>2</maxspeed>
+		<pauselength>2</pauselength>
+	</juanitamode>
+</advancedscroller>

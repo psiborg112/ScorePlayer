@@ -1,0 +1,20 @@
+<!ELEMENT opus (score+, updateurl?, version?, formatversion?)>
+<!ELEMENT score (name, composer, type, variation?, duration, startoffset?, readoffset?, filename?, prefsfile?, instructions?, audiofile?, options?, part*, audiopart*, manualidentifier?, backgroundrgb?)>
+<!ELEMENT updateurl (#PCDATA)>
+<!ELEMENT version (#PCDATA)>
+<!ELEMENT formatversion (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT composer (#PCDATA)>
+<!ELEMENT type (#PCDATA)>
+<!ELEMENT variation (#PCDATA)>
+<!ELEMENT duration (#PCDATA)>
+<!ELEMENT startoffset (#PCDATA)>
+<!ELEMENT readoffset (#PCDATA)>
+<!ELEMENT filename (#PCDATA)>
+<!ELEMENT prefsfile (#PCDATA)>
+<!ELEMENT instructions (#PCDATA)>
+<!ELEMENT audiofile (#PCDATA)>
+<!ELEMENT options(#PCDATA)>
+<!ELEMENT part (#PCDATA)>
+<!ELEMENT manualidentifier (#PCDATA)>
+<!ELEMENT backgroundrgb (#PCDATA)>

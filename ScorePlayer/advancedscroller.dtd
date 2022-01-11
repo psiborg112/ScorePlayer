@@ -1,0 +1,18 @@
+<!ELEMENT advancedscroller (liminummode?, juanitamode?, tiled?, playhead?, scrollermodule?, vertical?)>
+<!ELEMENT liminummode (middleduration, minfragment, maxfragment, minspeed, maxspeed, pauselength?)>
+<!ELEMENT juanitamode (middleduration, minfragment, maxfragment, minspeed, maxspeed, pauselength?)>
+<!ELEMENT middleduration (#PCDATA)>
+<!ELEMENT minfragment (#PCDATA)>
+<!ELEMENT maxfragment (#PCDATA)>
+<!ELEMENT minspeed (#PCDATA)>
+<!ELEMENT maxspeed (#PCDATA)>
+<!ELEMENT pauselength (#PCDATA)>
+<!ELEMENT tiled (tiles)>
+<!ELEMENT playhead (rgb, image, align)>
+<!ELEMENT rgb (#PCDATA)>
+<!ELEMENT image (#PCDATA)>
+<!ELEMENT align (#PCDATA)>
+<!ELEMENT scrollermodule (name, tiles?)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT tiles (#PCDATA)>
+<!ELEMENT vertical (#PCDATA)>

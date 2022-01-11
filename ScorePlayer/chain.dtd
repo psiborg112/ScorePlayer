@@ -1,0 +1,2 @@
+<!ELEMENT chain (starttime+)>
+<!ELEMENT starttime (#PCDATA)>

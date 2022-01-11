@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gxI-mh-YVa"/>
+                        <viewControllerLayoutGuide type="bottom" id="xUl-Re-NCI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" image="Loading" translatesAutoresizingMaskIntoConstraints="NO" id="3ev-SL-TdZ">
+                                <rect key="frame" x="0.0" y="50" width="768" height="924"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PtZ-RR-mJ3">
+                                <rect key="frame" x="0.0" y="974" width="768" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="q34-QR-hRZ"/>
+                                </constraints>
+                                <items/>
+                            </toolbar>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UMh-Fi-o7Q">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Rff-rO-I3R"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Decibel ScorePlayer" id="Prn-VX-ziR"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="PtZ-RR-mJ3" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Dur-MP-WIw"/>
+                            <constraint firstAttribute="bottom" secondItem="PtZ-RR-mJ3" secondAttribute="bottom" id="FTZ-Z2-VEj"/>
+                            <constraint firstItem="UMh-Fi-o7Q" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="Mx6-6L-OF1"/>
+                            <constraint firstItem="UMh-Fi-o7Q" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="NVN-q6-nE0"/>
+                            <constraint firstAttribute="trailing" secondItem="3ev-SL-TdZ" secondAttribute="trailing" id="eBR-tb-7LT"/>
+                            <constraint firstItem="3ev-SL-TdZ" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="eeZ-Lr-qcg"/>
+                            <constraint firstAttribute="trailing" secondItem="UMh-Fi-o7Q" secondAttribute="trailing" id="hnU-IU-FhA"/>
+                            <constraint firstAttribute="trailing" secondItem="PtZ-RR-mJ3" secondAttribute="trailing" id="rOR-vd-fIK"/>
+                            <constraint firstItem="3ev-SL-TdZ" firstAttribute="top" secondItem="UMh-Fi-o7Q" secondAttribute="bottom" id="tZH-mY-gZX"/>
+                            <constraint firstItem="PtZ-RR-mJ3" firstAttribute="top" secondItem="3ev-SL-TdZ" secondAttribute="bottom" id="yId-FZ-Br4"/>
+                        </constraints>
+                    </view>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="52.34375" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Loading" width="208" height="220"/>
+    </resources>
+</document>

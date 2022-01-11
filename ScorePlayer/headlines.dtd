@@ -1,0 +1,12 @@
+<!ELEMENT headlines (panel, partnames, duration, headline+, fontname?, fontsize?, titlecard?)>
+<!ELEMENT panel (filename, rows)>
+<!ELEMENT partnames (score?, part*)>
+<!ELEMENT filename (#PCDATA)>
+<!ELEMENT rows (#PCDATA)>
+<!ELEMENT score (#PCDATA)>
+<!ELEMENT part (#PCDATA)>
+<!ELEMENT duration (#PCDATA)>
+<!ELEMENT headline (#PCDATA)>
+<!ELEMENT fontname (#PCDATA)>
+<!ELEMENT fontsize (#PCDATA)>
+<!ELEMENT titlecard (#PCDATA)>

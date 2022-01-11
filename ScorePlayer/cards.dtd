@@ -1,0 +1,21 @@
+<!ELEMENT cards (quantity, upsidedown?, allowrepeats?, timer, dynamics, duo?, order?, fadetime?, backgroundrgb?, synccards?)>
+<!ELEMENT timer (mindisplay, maxdisplay, style?, counteroffset?)>
+<!ELEMENT dynamics (graphical?, dynamic+, textrgb?, backgroundrgb?)>
+<!ELEMENT duo (quantity, filename, probability)>
+<!ELEMENT order (change+)>
+<!ELEMENT quantitiy (#PCDATA)>
+<!ELEMENT upsidedown (#PCDATA)>
+<!ELEMENT allowrepeats (#PCDATA)>
+<!ELEMENT fadetime (#PCDATA)>
+<!ELEMENT backgroundrgb (#PCDATA)>
+<!ELEMENT synccards (#PCDATA)>
+<!ELEMENT mindisplay (#PCDATA)>
+<!ELEMENT maxdisplay (#PCDATA)>
+<!ELEMENT style (#PCDATA)>
+<!ELEMENT counteroffset (#PCDATA)>
+<!ELEMENT graphical (#PCDATA)>
+<!ELEMENT dynamic (#PCDATA)>
+<!ELEMENT textrgb (#PCDATA)>
+<!ELEMENT filename (#PCDATA)>
+<!ELEMENT probability (#PCDATA)>
+<!ELEMENT change (#PCDATA)>

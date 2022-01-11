@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE advancedscroller SYSTEM "advancedscroller.dtd">
+<advancedscroller>
+	<liminummode>
+		<middleduration>60</middleduration>
+		<minfragment>3</minfragment>
+		<maxfragment>6</maxfragment>
+		<minspeed>1</minspeed>
+		<maxspeed>1</maxspeed>
+		<pauselength>0</pauselength>
+	</liminummode>
+</advancedscroller>

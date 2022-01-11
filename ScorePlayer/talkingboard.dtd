@@ -1,0 +1,4 @@
+<!ELEMENT talkingboard (planchettes?, planchette*)>
+<!ELEMENT planchettes (#PCDATA)>
+<!ELEMENT planchette (rgb?)>
+<!ELEMENT rgb (#PCDATA)>

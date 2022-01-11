@@ -1,0 +1,4 @@
+<!ELEMENT canvas (parts?, scriptfile?, clearonreset?)>
+<!ELEMENT parts (#PCDATA)>
+<!ELEMENT scriptfile (#PCDATA)>
+<!ELEMENT clearonreset (#PCDATA)>

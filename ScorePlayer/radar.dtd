@@ -1,0 +1,5 @@
+<!ELEMENT radar (startangle?, rotations?, sweeprgb?, bidirectional?)>
+<!ELEMENT startangle (#PCDATA)>
+<!ELEMENT rotations (#PCDATA)>
+<!ELEMENT sweeprgb (#PCDATA)>
+<!ELEMENT bidirectional (#PCDATA)>

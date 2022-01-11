@@ -1,0 +1,6 @@
+<!ELEMENT slides (change+, split?, linkedparts?, part*)>
+<!ELEMENT part (number, change+)>
+<!ELEMENT change (#PCDATA)>
+<!ELEMENT split (#PCDATA)>
+<!ELEMENT linkedparts (#PCDATA)>
+<!ELEMENT number (#PCDATA)>
