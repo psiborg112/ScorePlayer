@@ -956,6 +956,11 @@
             audioPlayer = nil;
         }
         
+        //Save any annotations and reset the UI.
+        if (annotating) {
+            [self annotate];
+        }
+        
         [self dismissViewControllerAnimated:YES completion:nil];
         
         //Clean up the rendering delegate
