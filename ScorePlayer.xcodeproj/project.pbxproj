@@ -2530,7 +2530,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.0.7;
+				CURRENT_PROJECT_VERSION = 2.1.0;
 				DEVELOPMENT_TEAM = L8FKNLG3XM;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScorePlayer/ScorePlayer-Prefix.pch";
@@ -2544,7 +2544,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ScorePlayer/ScorePlayer-Info.plist";
-				MARKETING_VERSION = 2.0.7;
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = WAAPA.Decibel.ScorePlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2559,7 +2559,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.0.7;
+				CURRENT_PROJECT_VERSION = 2.1.0;
 				DEVELOPMENT_TEAM = L8FKNLG3XM;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScorePlayer/ScorePlayer-Prefix.pch";
@@ -2572,7 +2572,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ScorePlayer/ScorePlayer-Info.plist";
-				MARKETING_VERSION = 2.0.7;
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = WAAPA.Decibel.ScorePlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2621,7 +2621,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.0.7;
+				CURRENT_PROJECT_VERSION = 2.1.0;
 				DEVELOPMENT_TEAM = 2U5GEXWGZZ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScorePlayer/ScorePlayer-Prefix.pch";
@@ -2635,7 +2635,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ScorePlayer/ScorePlayer-Info.plist";
-				MARKETING_VERSION = 2.0.7;
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Decibel.ScorePlayer;
 				PRODUCT_NAME = "ScorePlayer (dev)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2650,7 +2650,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.0.7;
+				CURRENT_PROJECT_VERSION = 2.1.0;
 				DEVELOPMENT_TEAM = 2U5GEXWGZZ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScorePlayer/ScorePlayer-Prefix.pch";
@@ -2663,7 +2663,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ScorePlayer/ScorePlayer-Info.plist";
-				MARKETING_VERSION = 2.0.7;
+				MARKETING_VERSION = 2.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = Decibel.ScorePlayer;
 				PRODUCT_NAME = "ScorePlayer (dev)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

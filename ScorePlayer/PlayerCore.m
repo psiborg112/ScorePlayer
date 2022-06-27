@@ -625,6 +625,7 @@ const NSInteger NETWORK_PROTOCOL_VERSION = 16;
                 [self disconnect];
                 awaitingStatus = NO;
                 [UIDelegate networkErrorWithMessage:errorMessage toStandAlone:NO];
+                [UIDelegate allowAnnotation:true];
                 return;
             }
             
@@ -1054,7 +1055,7 @@ const NSInteger NETWORK_PROTOCOL_VERSION = 16;
     
     Connection *connection = [[Connection alloc] initWithHostAddress:hostName port:port];
     if ([connection connectWithDelegate:self withTimeout:timeout]) {
-        [UIDelegate preventAnnotation];
+        [UIDelegate allowAnnotation:false];
         [connections addObject:connection];
         isNetworked = YES;
         awaitingStatus = YES;

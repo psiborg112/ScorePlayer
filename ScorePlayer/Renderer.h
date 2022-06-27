@@ -47,7 +47,7 @@ static const NSInteger LOWER_PADDING = 52;
 - (void)networkErrorWithMessage:(NSString *)message toStandAlone:(BOOL)killNetworking;
 - (void)errorWithTitle:(NSString *)title message:(NSString *)message;
 - (void)awaitingNetwork:(BOOL)waiting;
-- (void)preventAnnotation;
+- (void)allowAnnotation:(BOOL)allowed;
 - (void)setInitialState:(PlayerState)state;
 
 @optional

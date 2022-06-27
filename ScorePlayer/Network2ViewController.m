@@ -8,6 +8,9 @@
 
 #import "Network2ViewController.h"
 
+const NSInteger RECOMMEND_UPDATE_MAJOR = 2;
+const NSInteger RECOMMEND_UPDATE_MINOR = 1;
+
 @interface Network2ViewController ()
 
 - (void)changeMode:(Mode)newViewMode;
@@ -20,6 +23,7 @@
     NSString *service;
     NSMutableArray *servers;
     NSMutableArray *filteredScores;
+    UIColor *defaultVersionColour;
     
     Mode viewMode;
     BOOL isFiltered;
@@ -44,6 +48,8 @@
     filteredScores = [[NSMutableArray alloc] init];
     isFiltered = NO;
     layoutView = NO;
+    
+    defaultVersionColour = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -330,7 +336,20 @@
         }
     
         cell.textLabel.text = [[networkDevices objectAtIndex:indexPath.row] objectAtIndex:0];
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"Version %@", [[networkDevices objectAtIndex:indexPath.row] objectAtIndex:1]];
+        
+        NSArray *versionComponents = [[[networkDevices objectAtIndex:indexPath.row] objectAtIndex:1] componentsSeparatedByString:@"."];
+        if ([versionComponents count] > 2 && [[versionComponents objectAtIndex:0] integerValue] <= RECOMMEND_UPDATE_MAJOR && [[versionComponents objectAtIndex:1] integerValue] < RECOMMEND_UPDATE_MINOR) {
+            if (defaultVersionColour == nil) {
+                defaultVersionColour = cell.detailTextLabel.textColor;
+            }
+            cell.detailTextLabel.textColor = [UIColor redColor];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"Version %@ - Update Strongly Recommended", [[networkDevices objectAtIndex:indexPath.row] objectAtIndex:1]];
+        } else {
+            if (defaultVersionColour != nil) {
+                cell.detailTextLabel.textColor = defaultVersionColour;
+            }
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"Version %@", [[networkDevices objectAtIndex:indexPath.row] objectAtIndex:1]];
+        }
     } else {
         cell = [tableView dequeueReusableCellWithIdentifier:@"DeviceCell"];
         
@@ -338,10 +357,12 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"DeviceCell"];
         }
         
+        if (defaultVersionColour != nil) {
+            cell.detailTextLabel.textColor = defaultVersionColour;
+        }
         if (isFiltered) {
             cell.textLabel.text = [[filteredScores objectAtIndex:indexPath.row] objectAtIndex:0];
             cell.detailTextLabel.text = [[filteredScores objectAtIndex:indexPath.row] objectAtIndex:1];
-
         } else {
             cell.textLabel.text = [[availableScores objectAtIndex:indexPath.row] objectAtIndex:0];
             cell.detailTextLabel.text = [[availableScores objectAtIndex:indexPath.row] objectAtIndex:1];

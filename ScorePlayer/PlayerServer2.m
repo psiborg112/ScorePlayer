@@ -45,10 +45,12 @@
 @implementation PlayerServer2 {
     NSNetService *publisher;
     NSNetService *udpPublisher;
+    NSNetService *resolver;
     NSString *service;
     NSString *udpService;
     NSString *preferredServerName;
     NSString *deviceName;
+    NSString *hostName;
     NSString *hostAddress;
     NSString *ipv4Address;
     NSUInteger preferredPortNumber;
@@ -103,6 +105,7 @@
     service = [NSString stringWithFormat:@"_%@._tcp.", serviceName];
     udpService = [NSString stringWithFormat:@"_%@._udp.", serviceName];
     
+    hostName = nil;
     hostAddress = nil;
     ipv4Address = nil;
     preferredPortNumber = preferredPort;
@@ -197,6 +200,20 @@
     [message appendAddressComponent:@"Server"];
     [message appendAddressComponent:@"SecondaryPort"];
     [message addIntegerArgument:portNumber];
+    //Previously only the port number was sent, and the address was taken from the connection details
+    //held on the primary server. We want the option to be able to override it here though, so that we
+    //can send through a hostname or IPv4 address rather than any IPv6 address we might be using.
+    //Recently MacOS and iOS have been giving route unreachable errors with link local IPv6 addresses if
+    //the interface is not explicitly specified, and this prevents connection to our secondary server.
+    //Hopefully this can be removed sometime in the future.
+    if (hostName != nil) {
+        [message addStringArgument:hostName];
+    } else if (ipv4Address != nil) {
+        [message addStringArgument:ipv4Address];
+    } else {
+        //Use as a last resort
+        [message addStringArgument:hostAddress];
+    }
     return message;
 }
 
@@ -694,7 +711,7 @@
         }
     } else {
         if ([[message.address objectAtIndex:1] isEqualToString:@"SecondaryPort"]) {
-            if (![message.typeTag isEqualToString:@",i"]) {
+            if (!([message.typeTag isEqualToString:@",i"] || [message.typeTag isEqualToString:@",is"])) {
                 return;
             }
             //Check that this is actually coming from our assigned secondary
@@ -702,7 +719,11 @@
                 [secondaryTimeOut invalidate];
                 
                 //Find the address of the secondary server. Then set the port and notify the clients.
-                secondaryAddress = secondaryConnection.peerAddress;
+                if ([message.typeTag isEqualToString:@",is"]) {
+                    secondaryAddress = [message.arguments objectAtIndex:1];
+                } else {
+                    secondaryAddress = secondaryConnection.peerAddress;
+                }
                 assert(secondaryAddress != nil);
                 secondaryPort = [[message.arguments objectAtIndex:0] unsignedIntegerValue];
                 secondaryConnection.deviceName = [NSString stringWithFormat:@"%@ (Secondary)", secondaryConnection.deviceName];
@@ -866,9 +887,11 @@
 
 - (void)secondaryTimeOut:(NSTimer *)timeOut
 {
-    //Cancel our timed out secondary, and blacklist it.
+    //Cancel our timed out secondary, and blacklist it if the connection is still active.
     Connection *connection = timeOut.userInfo;
-    [secondaryBlacklist addObject:connection];
+    if (connection != nil) {
+        [secondaryBlacklist addObject:connection];
+    }
     
     OSCMessage *message = [[OSCMessage alloc] init];
     [message appendAddressComponent:@"Server"];
@@ -1350,6 +1373,10 @@
     if (sender == publisher) {
         //In case we had to change name because of a collision update the server name.
         serverName = sender.name;
+        //Get our local host name using our service details.
+        resolver = [[NSNetService alloc] initWithDomain:@"local." type:service name:serverName port:(int)portNumber];
+        resolver.delegate = self;
+        [resolver resolveWithTimeout:5];
         
         //Since we succesfully published our tcp port, publish the udp port for any externals using the same server name.
         if (udpPortNumber != 0) {
@@ -1371,6 +1398,25 @@
     } else if (sender == udpPublisher) {
         udpPublisher.delegate = nil;
         udpPublisher = nil;
+    }
+}
+
+- (void)netServiceDidResolveAddress:(NSNetService *)sender
+{
+    if (sender == resolver) {
+        hostName = resolver.hostName;
+        resolver.delegate = nil;
+        resolver = nil;
+    }
+    
+}
+
+- (void)netService:(NSNetService *)sender didNotResolve:(NSDictionary<NSString *,NSNumber *> *)errorDict
+{
+    if (sender == resolver) {
+        hostName = nil;
+        resolver.delegate = nil;
+        resolver = nil;
     }
 }
 

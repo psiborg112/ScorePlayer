@@ -882,7 +882,11 @@
                 [audioPlayer seekToTime:(int)audioSeek];
             }
         } else {
-            [audioPlayer seekToTime:playerCore.clockProgress];
+            if (playerCore.clockProgress > 0) {
+                [audioPlayer seekToTime:playerCore.clockProgress];
+            } else {
+                [audioPlayer seekToTime:0];
+            }
         }
     }
 }
@@ -980,7 +984,7 @@
     }
 }
 
-- (void)loadScore:(Score *)score
+- (void)loadScore:(Score *)score 
 {
     //Update the navigation bar title.
     if (titleLabel != nil) {
@@ -1112,11 +1116,11 @@
     }
 }
 
-- (void)preventAnnotation
+- (void)allowAnnotation:(BOOL)allowed
 {
     //This is used to prevent annotation mode from being entered before we have a valid status
     //following connection to a server. It is cancelled when the setInitialState function is called.
-    annotateButton.enabled = NO;
+    annotateButton.enabled = allowed;
 }
 
 - (void)setInitialState:(PlayerState)state
