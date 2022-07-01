@@ -304,7 +304,11 @@ const NSInteger RECOMMEND_UPDATE_MINOR = 1;
 {
     // Return the number of rows in the section.
     if (viewMode == kChooseServer) {
-        return [servers count];
+        if ([servers count] > 0) {
+            return [servers count];
+        } else {
+            return 1;
+        }
     } else if (viewMode == kViewDevices) {
         return [networkDevices count];
     } else {
@@ -320,14 +324,27 @@ const NSInteger RECOMMEND_UPDATE_MINOR = 1;
 {
     UITableViewCell *cell;
     if (viewMode == kChooseServer) {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"ServerCell"];
-        
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"ServerCell"];
-        }
-        
         NSString *remove = [NSString stringWithFormat:@"%@.", serverNamePrefix];
-        cell.textLabel.text = [((NSNetService *)[servers objectAtIndex:indexPath.row]).name substringFromIndex:[remove length]];
+        if ([servers count] > 0) {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"ServerCell"];
+            
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"ServerCell"];
+            }
+            cell.textLabel.text = [((NSNetService *)[servers objectAtIndex:indexPath.row]).name substringFromIndex:[remove length]];
+        } else {
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DeviceCell"];
+        
+            if (cell == nil) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"DeviceCell"];
+            }
+
+            if (defaultVersionColour != nil) {
+                cell.detailTextLabel.textColor = defaultVersionColour;
+            }
+            cell.textLabel.text = @"No devices found";
+            cell.detailTextLabel.text = @"Make sure all iPads are on the same Wi-Fi network.";
+        }
     } else if (viewMode == kViewDevices) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"DeviceCell"];
     
@@ -375,7 +392,7 @@ const NSInteger RECOMMEND_UPDATE_MINOR = 1;
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (viewMode == kViewDevices) {
+    if (viewMode == kViewDevices || (viewMode == kChooseServer && [servers count] == 0)) {
         return nil;
     } else {
         return indexPath;
@@ -385,9 +402,11 @@ const NSInteger RECOMMEND_UPDATE_MINOR = 1;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (viewMode == kChooseServer) {
-        NSNetService *server = [servers objectAtIndex:indexPath.row];
-        server.delegate = self;
-        [server resolveWithTimeout:5];
+        if ([servers count] > 0) {
+            NSNetService *server = [servers objectAtIndex:indexPath.row];
+            server.delegate = self;
+            [server resolveWithTimeout:5];
+        }
     } else if (viewMode == kChooseScore) {
         [self dismissViewControllerAnimated:YES completion:nil];
         if (isFiltered) {

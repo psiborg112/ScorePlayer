@@ -390,6 +390,9 @@
         OSCMessage *message = [[OSCMessage alloc] init];
         [message appendAddressComponent:@"CardsRequest"];
         [messagingDelegate sendData:message];
+    } else if ((duoCards > 0 || syncCards) && !ordered && [latestCardOrder count] > 0) {
+        //Update our cached refresh message.
+        duoMessage = [self generateDuoMessageAsNew:NO];
     }
 }
 
@@ -616,10 +619,10 @@
     }
     
     //We only need to generate new material here if we're not using duo cards or are the master
-    if (isMaster || (duoCards == 0)) {
-        if (duoCards > 0) {
+    if (isMaster || !(duoCards > 0 || syncCards)) {
+        if (duoCards > 0 || syncCards) {
             duoMessage = nil;
-            latestCardOrder = [self generateCardOrderWithDuos:YES fromTime:0 toTime:duration];
+            latestCardOrder = [self generateCardOrderWithDuos:(duoCards > 0) fromTime:0 toTime:duration];
             
             OSCMessage *message = [self generateDuoMessageAsNew:YES];
             [messagingDelegate sendData:message];

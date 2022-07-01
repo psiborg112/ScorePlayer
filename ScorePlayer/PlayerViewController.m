@@ -46,6 +46,9 @@
     //CALayer *statusBarBackground;
     CALayer *dimmer;
     CALayer *cueLight;
+    CALayer *connectedNotification;
+    CATextLayer *connectedText;
+    
     UIColor *clockColour;
     CGFloat savedDuration;
     
@@ -119,6 +122,18 @@
     dimmer.opacity = 0.4;
     CGFloat longSide = MAX(self.view.frame.size.width, self.view.frame.size.height);
     dimmer.frame = CGRectMake(-20, -20, longSide + 40, longSide + 40);
+    
+    connectedNotification = [CALayer layer];
+    connectedNotification.frame = CGRectMake(0, 0, 200, 50);
+    connectedNotification.cornerRadius = 10;
+    connectedNotification.opacity = 0;
+    connectedText = [CATextLayer layer];
+    connectedText.string = @"Connected";
+    connectedText.fontSize = 24;
+    connectedText.alignmentMode = kCAAlignmentCenter;
+    connectedText.frame = CGRectMake(0, 8, connectedNotification.frame.size.width, connectedNotification.frame.size.height - 8);
+    [connectedNotification addSublayer:connectedText];
+    [canvasView.layer addSublayer:connectedNotification];
     
     //Set up status bar background
     /*statusBarBackground = [CALayer layer];
@@ -569,6 +584,10 @@
     cueLightScale = MIN(widthRatio, heightRatio);
     cueLight.frame = CGRectMake(screenSize.width - (110 * cueLightScale), 10 * cueLightScale, 100 * cueLightScale, 100 * cueLightScale);
     cueLight.cornerRadius = (50 * cueLightScale);
+    
+    //And our connection notification layer.
+    connectedNotification.position = CGPointMake(screenSize.width / 2, (screenSize.height / 2) - navigationHeight);
+    
     [CATransaction commit];
 }
 
@@ -1145,6 +1164,18 @@
                 [self hideNavigationBar:NO];
             }
         }
+        //If we're stopped, show our connection notification
+        [connectedNotification removeAllAnimations];
+        [CATransaction begin];
+        [CATransaction setDisableActions:YES];
+        [CATransaction setCompletionBlock:^{
+            [CATransaction begin];
+            [CATransaction setAnimationDuration:3];
+            self->connectedNotification.opacity = 0;
+            [CATransaction commit];
+        }];
+        connectedNotification.opacity = 0.9;
+        [CATransaction commit];
     } else if (playerState == kPaused) {
         [self hideNavigationBar:YES];
     }
@@ -1412,8 +1443,13 @@
     CGFloat yiq = (red * 0.299) + (green * 0.587) + (blue * 0.114);
     if (yiq < 0.5) {
         clockColour = [UIColor whiteColor];
+        connectedNotification.backgroundColor = [UIColor whiteColor].CGColor;
+        connectedText.foregroundColor = [UIColor blackColor].CGColor;
+        
     } else {
         clockColour = [UIColor blackColor];
+        connectedNotification.backgroundColor = [UIColor blackColor].CGColor;
+        connectedText.foregroundColor = [UIColor whiteColor].CGColor;
     }
     self.clockVisible = clockVisible;
 }
