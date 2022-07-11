@@ -7,9 +7,7 @@
 //
 
 #import "Network2ViewController.h"
-
-const NSInteger RECOMMEND_UPDATE_MAJOR = 2;
-const NSInteger RECOMMEND_UPDATE_MINOR = 1;
+#import "Version.h"
 
 @interface Network2ViewController ()
 
@@ -119,6 +117,7 @@ const NSInteger RECOMMEND_UPDATE_MINOR = 1;
         //Use a three second timeout when connecting manually so that the interface doesn't
         //become unresponsive due to a failing DNS lookup.
         [self->networkConnectionDelegate saveLastManualAddress:[manualInputBox.textFields objectAtIndex:0].text];
+        self->networkConnectionDelegate.connectedManually = YES;
         [self->networkConnectionDelegate connectToServer:address onPort:port withTimeout:3];
         self->networkConnectionDelegate = nil;
         [self performSegueWithIdentifier:@"returnToPlayer" sender:self];
@@ -466,6 +465,7 @@ const NSInteger RECOMMEND_UPDATE_MINOR = 1;
 {
     [netServiceBrowser stop];
     netServiceBrowser.delegate = nil;
+    networkConnectionDelegate.connectedManually = NO;
     [networkConnectionDelegate connectToServer:sender.hostName onPort:sender.port withTimeout:-1];
     networkConnectionDelegate = nil;
     [self performSegueWithIdentifier:@"returnToPlayer" sender:self];

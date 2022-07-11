@@ -39,7 +39,7 @@
 - (id)initWithName:(NSString *)name deviceName:(NSString *)devName serviceName:(NSString *)serviceName preferredPort:(NSUInteger)preferredPort protocolVersion:(NSInteger)netProtocolVersion;
 
 - (BOOL)start;
-- (OSCMessage *)startSecondary:(NSString *)host;
+- (OSCMessage *)startSecondary:(NSString *)host ignoreBonjourAddress:(BOOL)ignoreLocal;
 - (void)makePrimary;
 - (void)disconnectClients;
 - (void)stop;

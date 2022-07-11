@@ -48,7 +48,7 @@ static const NSInteger LOWER_PADDING = 52;
 - (void)errorWithTitle:(NSString *)title message:(NSString *)message;
 - (void)awaitingNetwork:(BOOL)waiting;
 - (void)allowAnnotation:(BOOL)allowed;
-- (void)setInitialState:(PlayerState)state;
+- (void)setInitialState:(PlayerState)state fromNetwork:(BOOL)connected;
 
 @optional
 - (void)showCueLight:(UIColor *)colour;

@@ -30,6 +30,7 @@
     
     __weak id<RendererDelegate> rendererDelegate;
     id<NetworkStatus> networkStatusDelegate;
+    BOOL connectedManually;
 }
 
 extern const NSInteger NETWORK_PROTOCOL_VERSION;

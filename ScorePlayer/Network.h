@@ -9,6 +9,7 @@
 @protocol NetworkConnectionDelegate <NSObject>
 
 @required
+@property (nonatomic) BOOL connectedManually;
 - (void)connectToServer:(NSString *)hostName onPort:(NSUInteger)port withTimeout:(NSInteger)timeout;
 - (void)saveLastManualAddress:(NSString *)address;
 - (void)disconnect;

@@ -67,7 +67,7 @@ const NSInteger NETWORK_PROTOCOL_VERSION = 16;
     __weak id<PlayerUIDelegate> delegateBackup;
 }
 
-@synthesize isPausable, isStatic, playerState, currentScore, isMaster, clockEnabled, allowClockChange, clockDuration, clockProgress, splitSecondMode, allowSyncToTick, identifier, rendererDelegate, networkStatusDelegate;
+@synthesize isPausable, isStatic, playerState, currentScore, isMaster, clockEnabled, allowClockChange, clockDuration, clockProgress, splitSecondMode, allowSyncToTick, identifier, rendererDelegate, networkStatusDelegate, connectedManually;
 
 - (id)initWithScore:(Score *)score delegate:(__weak id<PlayerUIDelegate>)delegate
 {
@@ -87,6 +87,7 @@ const NSInteger NETWORK_PROTOCOL_VERSION = 16;
     networkDevices = [[NSMutableArray alloc] init];
     connections = [[NSMutableArray alloc] init];
     lastNetworkAddress = [LastNetworkAddress sharedNetworkAddress];
+    connectedManually = NO;
     
     durationChangeLock = [[NSLock alloc] init];
     
@@ -376,7 +377,7 @@ const NSInteger NETWORK_PROTOCOL_VERSION = 16;
         if ([rendererDelegate respondsToSelector:@selector(attemptSync)]) {
             [rendererDelegate attemptSync];
         }
-        [UIDelegate setInitialState:playerState];
+        [UIDelegate setInitialState:playerState fromNetwork:NO];
     }
     return savedDuration;
 }
@@ -674,7 +675,7 @@ const NSInteger NETWORK_PROTOCOL_VERSION = 16;
                 playerState = kPaused;
             }
             [self playerSeekFinishedAfterResync:YES];
-            [UIDelegate setInitialState:playerState];
+            [UIDelegate setInitialState:playerState fromNetwork:YES];
             awaitingStatus = NO;
         }
     } else if ([[message.address objectAtIndex:0] isEqualToString:@"Tick"]){
@@ -820,7 +821,7 @@ const NSInteger NETWORK_PROTOCOL_VERSION = 16;
             }
         } else if ([[message.address objectAtIndex:1] isEqualToString:@"MakeSecondary"] && !isMaster) {
             //Start up a secondary server
-            OSCMessage *message = [playerServer startSecondary:connection.localAddress];
+            OSCMessage *message = [playerServer startSecondary:connection.localAddress ignoreBonjourAddress:connectedManually];
             if (message == nil) {
                 //The server failed to start. We should handle this in a more robust way,
                 //but for the moment we'll just silently give up.

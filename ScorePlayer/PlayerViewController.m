@@ -1142,7 +1142,7 @@
     annotateButton.enabled = allowed;
 }
 
-- (void)setInitialState:(PlayerState)state
+- (void)setInitialState:(PlayerState)state fromNetwork:(BOOL)connected
 {
     playerState = state;
     [self layoutUpperButtons];
@@ -1165,17 +1165,19 @@
             }
         }
         //If we're stopped, show our connection notification
-        [connectedNotification removeAllAnimations];
-        [CATransaction begin];
-        [CATransaction setDisableActions:YES];
-        [CATransaction setCompletionBlock:^{
+        if (connected) {
+            [connectedNotification removeAllAnimations];
             [CATransaction begin];
-            [CATransaction setAnimationDuration:3];
-            self->connectedNotification.opacity = 0;
+            [CATransaction setDisableActions:YES];
+            [CATransaction setCompletionBlock:^{
+                [CATransaction begin];
+                [CATransaction setAnimationDuration:3];
+                self->connectedNotification.opacity = 0;
+                [CATransaction commit];
+            }];
+            connectedNotification.opacity = 0.9;
             [CATransaction commit];
-        }];
-        connectedNotification.opacity = 0.9;
-        [CATransaction commit];
+        }
     } else if (playerState == kPaused) {
         [self hideNavigationBar:YES];
     }

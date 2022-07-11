@@ -666,6 +666,7 @@
 		AE367E251AB937670079109A /* cards.dtd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = cards.dtd; sourceTree = "<group>"; };
 		AE3839221FE43A3F0070BB2D /* CanvasLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CanvasLayer.h; sourceTree = "<group>"; };
 		AE3839231FE43A3F0070BB2D /* CanvasLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CanvasLayer.m; sourceTree = "<group>"; };
+		AE3CB11A287BA36300C02515 /* Version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
 		AE3D4B2F2336130C00D18E18 /* Cage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Cage.xcassets; sourceTree = "<group>"; };
 		AE3D4B31233614CB00D18E18 /* cageComponentInv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cageComponentInv.png; sourceTree = "<group>"; };
 		AE3D4B32233614CC00D18E18 /* cageSystemInv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cageSystemInv.png; sourceTree = "<group>"; };
@@ -1121,6 +1122,7 @@
 				AED1B5961DC9C429004AD3FF /* LastNetworkAddress.m */,
 				AE30AD631A08672E009FA926 /* OpusParser.h */,
 				AE30AD641A08672E009FA926 /* OpusParser.m */,
+				AE3CB11A287BA36300C02515 /* Version.h */,
 				AE1788791585ED02005A7BCB /* MainStoryboard.storyboard */,
 				AE4A0DA32336DD020056E4E1 /* Launch Screen.storyboard */,
 				AED62B971CE24CF400161E33 /* Audio */,
@@ -2530,7 +2532,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.1.1;
+				CURRENT_PROJECT_VERSION = 2.1.3;
 				DEVELOPMENT_TEAM = L8FKNLG3XM;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScorePlayer/ScorePlayer-Prefix.pch";
@@ -2544,7 +2546,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ScorePlayer/ScorePlayer-Info.plist";
-				MARKETING_VERSION = 2.1.1;
+				MARKETING_VERSION = 2.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = WAAPA.Decibel.ScorePlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2559,7 +2561,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.1.1;
+				CURRENT_PROJECT_VERSION = 2.1.3;
 				DEVELOPMENT_TEAM = L8FKNLG3XM;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScorePlayer/ScorePlayer-Prefix.pch";
@@ -2572,7 +2574,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ScorePlayer/ScorePlayer-Info.plist";
-				MARKETING_VERSION = 2.1.1;
+				MARKETING_VERSION = 2.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = WAAPA.Decibel.ScorePlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2621,7 +2623,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.1.1;
+				CURRENT_PROJECT_VERSION = 2.1.3;
 				DEVELOPMENT_TEAM = 2U5GEXWGZZ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScorePlayer/ScorePlayer-Prefix.pch";
@@ -2635,7 +2637,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ScorePlayer/ScorePlayer-Info.plist";
-				MARKETING_VERSION = 2.1.1;
+				MARKETING_VERSION = 2.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = Decibel.ScorePlayer;
 				PRODUCT_NAME = "ScorePlayer (dev)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2650,7 +2652,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.1.1;
+				CURRENT_PROJECT_VERSION = 2.1.3;
 				DEVELOPMENT_TEAM = 2U5GEXWGZZ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScorePlayer/ScorePlayer-Prefix.pch";
@@ -2663,7 +2665,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ScorePlayer/ScorePlayer-Info.plist";
-				MARKETING_VERSION = 2.1.1;
+				MARKETING_VERSION = 2.1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = Decibel.ScorePlayer;
 				PRODUCT_NAME = "ScorePlayer (dev)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

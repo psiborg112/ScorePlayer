@@ -39,6 +39,7 @@
 
 - (BOOL)isIPv4Address:(NSString *)address;
 - (NSString *)getIPv4ForInterfaceWithIPv6Address:(NSString *)address;
+- (void)sendExternalMessage:(OSCMessage *)message toHost:(NSString *)address port:(int)port;
 
 @end
 
@@ -182,7 +183,7 @@
     return YES;
 }
 
-- (OSCMessage *)startSecondary:(NSString *)address
+- (OSCMessage *)startSecondary:(NSString *)address ignoreBonjourAddress:(BOOL)ignoreLocal
 {
     if (![self serverStart]) {
         return nil;
@@ -206,13 +207,18 @@
     //Recently MacOS and iOS have been giving route unreachable errors with link local IPv6 addresses if
     //the interface is not explicitly specified, and this prevents connection to our secondary server.
     //Hopefully this can be removed sometime in the future.
-    if (hostName != nil) {
-        [message addStringArgument:hostName];
-    } else if (ipv4Address != nil) {
-        [message addStringArgument:ipv4Address];
-    } else {
-        //Use as a last resort
-        [message addStringArgument:hostAddress];
+    
+    //Only override this though if we haven't manually specified our connection address.
+    //(We're unlikely to be using a link local IPv6 address in this case.)
+    if (!ignoreLocal) {
+        if (hostName != nil) {
+            [message addStringArgument:hostName];
+        } else if (ipv4Address != nil) {
+            [message addStringArgument:ipv4Address];
+        } else {
+            //Use as a last resort
+            [message addStringArgument:hostAddress];
+        }
     }
     return message;
 }
@@ -342,9 +348,9 @@
             for (int i = 0; i < [[oldExternals objectForKey:address] count]; i++) {
                 int port = [[[oldExternals objectForKey:address] objectAtIndex:i] intValue];
                 if (ipv4Address != nil && [self isIPv4Address:address]) {
-                    [udpSocket sendData:[ipv4message messageAsDataWithHeader:NO] toHost:address port:port withTimeout:-1 tag:0];
+                    [self sendExternalMessage:ipv4message toHost:address port:port];
                 } else {
-                    [udpSocket sendData:[message messageAsDataWithHeader:NO] toHost:address port:port withTimeout:-1 tag:0];
+                    [self sendExternalMessage:message toHost:address port:port];
                 }
             }
         }
@@ -404,7 +410,7 @@
             for (NSString* address in externals) {
                 for (int i = 0; i < [[externals objectForKey:address] count]; i++) {
                     int port = [[[externals objectForKey:address] objectAtIndex:i] intValue];
-                    [udpSocket sendData:[message messageAsDataWithHeader:NO] toHost:address port:port withTimeout:-1 tag:0];
+                    [self sendExternalMessage:message toHost:address port:port];
                 }
             }
             [dictionaryLock unlock];
@@ -660,7 +666,7 @@
                 [response appendAddressComponent:@"Server"];
                 [response appendAddressComponent:@"BadProtocolVersion"];
                 [response addStringArgument:[NSString stringWithFormat:@"Expected v%lu", (unsigned long)protocolVersion]];
-                [udpSocket sendData:[response messageAsDataWithHeader:NO] toHost:[message.arguments objectAtIndex:2] port:[[message.arguments objectAtIndex:1] intValue] withTimeout:-1 tag:0];
+                [self sendExternalMessage:response toHost:[message.arguments objectAtIndex:2] port:[[message.arguments objectAtIndex:1] intValue]];
             } else if (!protocolError) {
                 [dictionaryLock lock];
                 if ([externals objectForKey:[message.arguments objectAtIndex:2]] == nil) {
@@ -672,7 +678,7 @@
                 OSCMessage *response = [[OSCMessage alloc] init];
                 [response appendAddressComponent:@"Server"];
                 [response appendAddressComponent:@"RegistrationOK"];
-                [udpSocket sendData:[response messageAsDataWithHeader:NO] toHost:[message.arguments objectAtIndex:2] port:[[message.arguments objectAtIndex:1] intValue] withTimeout:-1 tag:0];
+                [self sendExternalMessage:response toHost:[message.arguments objectAtIndex:2] port:[[message.arguments objectAtIndex:1] intValue]];
                 
                 //Also notify our secondary that there is an external.
                 if (secondaryConnection != nil) {
@@ -771,7 +777,7 @@
                 NSArray *portList = [externals objectForKey:[message.arguments objectAtIndex:0]];
                 for (int i = 0; i < [portList count]; i++) {
                     int port = [[portList objectAtIndex:i] intValue];
-                    [udpSocket sendData:[response messageAsDataWithHeader:NO] toHost:[message.arguments objectAtIndex:0] port:port withTimeout:-1 tag:0];
+                    [self sendExternalMessage:response toHost:[message.arguments objectAtIndex:0] port:port];
                 }
             }
         } else {
@@ -788,7 +794,7 @@
                 NSArray *portList = [externals objectForKey:[message.arguments objectAtIndex:0]];
                 for (int i = 0; i < [portList count]; i++) {
                     int port = [[portList objectAtIndex:i] intValue];
-                    [udpSocket sendData:[response messageAsDataWithHeader:NO] toHost:[message.arguments objectAtIndex:0] port:port withTimeout:-1 tag:0];
+                    [self sendExternalMessage:response toHost:[message.arguments objectAtIndex:0] port:port];
                 }
             }
         } else {
@@ -824,7 +830,7 @@
             NSArray *portList = [externals objectForKey:[message.arguments lastObject]];
             for (int i = 0; i < [portList count]; i++) {
                 int port = [[portList objectAtIndex:i] intValue];
-                [udpSocket sendData:[response messageAsDataWithHeader:NO] toHost:[message.arguments objectAtIndex:4] port:port withTimeout:-1 tag:0];
+                [self sendExternalMessage:response toHost:[message.arguments objectAtIndex:4] port:port];
             }
         } else if (badRequest) {
             [response appendAddressComponent:@"RequestRejected"];
@@ -983,7 +989,7 @@
         for (NSString* address in externals) {
             for (int i = 0; i < [[externals objectForKey:address] count]; i++) {
                 int port = [[[externals objectForKey:address] objectAtIndex:i] intValue];
-                [udpSocket sendData:[message messageAsDataWithHeader:NO] toHost:address port:port withTimeout:-1 tag:0];
+                [self sendExternalMessage:message toHost:address port:port];
             }
         }
     }
@@ -1121,7 +1127,7 @@
     for (NSString *address in externals) {
         for (int i = 0; i < [[externals objectForKey:address] count]; i++) {
             int port = [[[externals objectForKey:address] objectAtIndex:i] intValue];
-            [udpSocket sendData:[message messageAsDataWithHeader:NO] toHost:address port:port withTimeout:-1 tag:0];
+            [self sendExternalMessage:message toHost:address port:port];
         }
     }
     [dictionaryLock unlock];
@@ -1199,6 +1205,16 @@
     
     //Return the IPv4 address that corresponds to our IPv6 interface.
     return [addresses objectForKey:[interfaces objectForKey:address]];
+}
+
+- (void)sendExternalMessage:(OSCMessage *)message toHost:(NSString *)address port:(int)port
+{
+    if ([address hasPrefix:@"fe80::"]) {
+        //If we have a link local address, send via our wifi interface.
+        //(We should have a better way of finding this rather than assuming it will be en0.)
+        address = [address stringByAppendingString:@"%en0"];
+    }
+    [udpSocket sendData:[message messageAsDataWithHeader:NO] toHost:address port:port withTimeout:-1 tag:0];
 }
 
 #pragma mark - GCDAsyncSocket delegate
