@@ -272,9 +272,15 @@
     
     if (numberOfTiles > 1) {
         currentTile = -background.position.x / (int)tileWidth;
+        NSLog(@"%f, %f, %i, %i", x, -background.position.x, (int)tileWidth, currentTile);
         //Check bounds in case of LV. (Who creates a score that's so tiny anyway?)
         if (currentTile < 0) {
             currentTile = 0;
+        } else if (currentTile >= numberOfTiles) {
+            //In some rare instances the currentTile ends up out of bounds. Check for this.
+            //(It usually happens when a score has its playhead positioned right against
+            //the left edge of the screen.)
+            currentTile = (int)numberOfTiles - 1;
         }
         [self loadNeededTilesWithLargeChange:largeChange];
     }
