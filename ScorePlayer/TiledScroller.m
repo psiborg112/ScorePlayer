@@ -272,7 +272,6 @@
     
     if (numberOfTiles > 1) {
         currentTile = -background.position.x / (int)tileWidth;
-        NSLog(@"%f, %f, %i, %i", x, -background.position.x, (int)tileWidth, currentTile);
         //Check bounds in case of LV. (Who creates a score that's so tiny anyway?)
         if (currentTile < 0) {
             currentTile = 0;
