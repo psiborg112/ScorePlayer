@@ -150,7 +150,7 @@
 {
     //If we're not loading a local html file, load in safari.
     if (navigationAction.request.URL.host != nil) {
-        [[UIApplication sharedApplication] openURL:navigationAction.request.URL];
+        [[UIApplication sharedApplication] openURL:navigationAction.request.URL options:@{} completionHandler:nil];
         decisionHandler(WKNavigationActionPolicyCancel);
     } else {
         decisionHandler(WKNavigationActionPolicyAllow);
@@ -162,27 +162,6 @@
     if (webView.isHidden) {
         webView.hidden = NO;
     }
-}*/
-
-#pragma mark - UIWebView delegate
-
-//This is now handled by a timer because links to page elements don't trigger a load event.
-/*- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    if (navigationEnabled) {
-        backButton.enabled = webView.canGoBack;
-        forwardButton.enabled = webView.canGoForward;
-    }
-}*/
-
-/*- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    //If we're not loading a local html file, load in safari.
-    if (request.URL.host != nil) {
-        [[UIApplication sharedApplication] openURL:request.URL];
-        return NO;
-    }
-    return YES;
 }*/
 
 @end

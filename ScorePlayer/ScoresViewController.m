@@ -57,6 +57,8 @@
     BOOL firstAppearance;
     
     NSString *identifier;
+    NSString *deviceName;
+    BOOL iOS16Workaround;
     
     BOOL handlingCorruptScores;
     NSMutableArray *corruptScores;
@@ -122,6 +124,22 @@
     knocks = 0;
     projectionMode = NO;
     identifier = nil;
+    if (@available(iOS 16.0, *)) {
+        //As of iOS 16, the current device name can't be retrieved without additional
+        //entitlements. (The function always just returns "iPad" and so is effectively useless.)
+        iOS16Workaround = false;
+        deviceName = [[[[NSProcessInfo processInfo] hostName] componentsSeparatedByString:@"."] objectAtIndex:0];
+        
+        /*iOS16Workaround = true;
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        deviceName = [userDefaults stringForKey:@"DeviceName"];
+        updateButton.enabled = YES;
+        updateButton.title = @"Change Device Name";*/
+    } else {
+        iOS16Workaround = false;
+        deviceName = [[UIDevice currentDevice] name];
+    }
+    
     poseForIntroScreenshot = NO;
     
     //Set up our dimmer layer
@@ -192,6 +210,34 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (iOS16Workaround && (deviceName == nil)) {
+        UIAlertController *deviceNameInputBox = [UIAlertController alertControllerWithTitle:@"Enter Device Name" message:@"Apple broke the ScorePlayer's ability to get your iPad's device name with iOS 16. Please enter a unique name here so that your iPad can be recognised by others who want to connect to it. (Otherwise every device will appear on the network connection screen as \"iPad\" - I'm iPad! No, I'm iPad! No, I'm Spartacus!)"  preferredStyle:UIAlertControllerStyleAlert];
+        [deviceNameInputBox addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+            textField.delegate = self;
+            textField.keyboardType = UIKeyboardTypeDefault;
+            textField.placeholder = @"iPad";
+            textField.autocorrectionType = UITextAutocorrectionTypeNo;
+        }];
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            if ([[deviceNameInputBox.textFields objectAtIndex:0].text length] != 0) {
+                self->deviceName = [deviceNameInputBox.textFields objectAtIndex:0].text;
+            } else {
+                //You unimaginative sod.
+                self->deviceName = @"iPad";
+            }
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setObject:self->deviceName forKey:@"DeviceName"];
+        }];
+        
+        [deviceNameInputBox addAction:okAction];
+        [self presentViewController:deviceNameInputBox animated:YES completion:nil];
+    }
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -255,6 +301,9 @@
         if ([updateAddresses count] > 0) {
             updateButton.enabled = YES;
             updateButton.title = @"Check for Updates";
+        } else {
+            updateButton.enabled = NO;
+            updateButton.title = @"";
         }
     } else {
         viewMode = kChooseScore;
@@ -271,8 +320,13 @@
             projectionButton.title = @"Enable Projection Mode";
         }
         
-        updateButton.enabled = NO;
-        updateButton.title = @"";
+        if (iOS16Workaround) {
+            updateButton.enabled = YES;
+            updateButton.title = @"Change Device Name";
+        } else {
+            updateButton.enabled = NO;
+            updateButton.title = @"";
+        }
         
         dumpButton.title = @"";
         knocks = 0;
@@ -310,8 +364,30 @@
 
 - (IBAction)update
 {
-    updateDialogDisplayed = YES;
-    [self performSegueWithIdentifier:@"toUpdate" sender:self];
+    if (viewMode == kChooseScore) {
+        UIAlertController *deviceNameInputBox = [UIAlertController alertControllerWithTitle:@"Enter Device Name" message:@"Enter a new name to identify your iPad over the network."  preferredStyle:UIAlertControllerStyleAlert];
+        [deviceNameInputBox addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+            textField.delegate = self;
+            textField.keyboardType = UIKeyboardTypeDefault;
+            textField.placeholder = self->deviceName;
+        }];
+        
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            if ([[deviceNameInputBox.textFields objectAtIndex:0].text length] != 0) {
+                self->deviceName = [deviceNameInputBox.textFields objectAtIndex:0].text;
+                NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+                [userDefaults setObject:self->deviceName forKey:@"DeviceName"];
+            }
+        }];
+        
+        [deviceNameInputBox addAction:cancelAction];
+        [deviceNameInputBox addAction:okAction];
+        [self presentViewController:deviceNameInputBox animated:YES completion:nil];
+    } else {
+        updateDialogDisplayed = YES;
+        [self performSegueWithIdentifier:@"toUpdate" sender:self];
+    }
 }
 
 - (IBAction)dump
@@ -1003,11 +1079,12 @@
         [scoreSearch resignFirstResponder];
     
         if (selectedScore.askForIdentifier) {
-            UIAlertController *identifierInputBox = [UIAlertController alertControllerWithTitle:@"Enter Identifier" message:@"Enter a unique identifier for this iPad." preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertController *identifierInputBox = [UIAlertController alertControllerWithTitle:@"Enter Identifier" message:@"The selected score requires a custom identifier to be supplied for your iPad. (Check any accompanying material for specific details.)" preferredStyle:UIAlertControllerStyleAlert];
             [identifierInputBox addTextFieldWithConfigurationHandler:^(UITextField *textField) {
                 textField.delegate = self;
                 textField.keyboardType = UIKeyboardTypeDefault;
-                textField.placeholder = [[UIDevice currentDevice] name];
+                textField.placeholder = self->deviceName;
+                textField.autocorrectionType = UITextAutocorrectionTypeNo;
             }];
             
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -1027,6 +1104,7 @@
             [identifierInputBox addAction:okAction];
             [self presentViewController:identifierInputBox animated:YES completion:nil];
         } else {
+            identifier = deviceName;
             [refreshCondition lock];
             while (refreshInProgress) {
                 [refreshCondition wait];
@@ -1085,6 +1163,14 @@
 }
 
 #pragma mark - UITextField delegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if ([string containsString:@"."]) {
+        return NO;
+    }
+    return YES;
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
