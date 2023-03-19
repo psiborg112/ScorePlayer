@@ -433,22 +433,11 @@ static OSStatus OutputRenderCallback (void *inRefCon, AudioUnitRenderActionFlags
         return noErr;
     }
     
-    //First check if we've reached our end of file. If we have, stop our output unit and reset the playback buffers.
+    //First check if we've reached our end of file. If we have, stop our output unit.
     if (buffers->bufferBytesUsed[currentBuffer] == 0) {
         AudioOutputUnitStop(buffers->outputUnit);
         buffers->isRunning = NO;
-        
-        ExtAudioFileSeek(buffers->file, 0);
-        buffers->currentWriteBuffer = 0;
-        for (int i = 0; i < kBufferCount; i++) {
-            [AudioPlayer2 fillBufferNumber:i ofBufferSet:buffers];
-        }
-        [AudioPlayer2 applyFadeIn:128 onBufferNumber:0 ofBufferSet:buffers];
-        
-        buffers->lastSeekFrame = 0;
-        buffers->bufferLocation = 0;
-        buffers->currentBuffer = 0;
-        buffers->seekBeyondEOF = NO;
+        buffers->seekBeyondEOF = YES;
         buffers->fadeOutState = 0;
         return noErr;
     }

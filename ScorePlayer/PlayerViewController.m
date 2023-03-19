@@ -798,6 +798,7 @@
 {
     playerState = kStopped;
     resetViewOnSeek = NO;
+    audioSeek = 0;
     
     //Basic canvas reset
     //This is now the responsibility of individual renderers. It should be done between data verification
@@ -961,6 +962,7 @@
     }
     
     if (audioSeek == playerCore.clockProgress && !splitSecond) {
+        audioSeek = 0;
         [audioPlayer play];
         if ([rendererDelegate respondsToSelector:@selector(attemptSync)]) {
             //Make sure our renderer hasn't been put out by the audio load time.

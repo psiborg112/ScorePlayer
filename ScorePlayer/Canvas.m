@@ -40,6 +40,7 @@
     
     NSInteger parts;
     NSInteger currentPart;
+    BOOL hasScore;
     
     NSString *scriptFile;
     BOOL clearOnReset;
@@ -76,8 +77,14 @@
 {
     NSInteger newPart = currentPart + relativeChange;
     if (newPart > parts) {
-        newPart = 1;
-    } else if (newPart <= 0) {
+        if (hasScore) {
+            newPart = 0;
+        } else {
+            newPart = 1;
+        }
+    } else if (newPart <= 0 && !hasScore) {
+        newPart = parts;
+    } else if (newPart < 0 && hasScore) {
         newPart = parts;
     }
     
@@ -85,7 +92,7 @@
     [objectsLock lock];
     for (NSString *key in objects) {
         NSInteger partNumber = ((id<CanvasObject>)[objects objectForKey:key]).partNumber;
-        if (partNumber == currentPart || partNumber == 0) {
+        if (currentPart == 0 || partNumber == currentPart || partNumber == 0) {
             ((id<CanvasObject>)[objects objectForKey:key]).hidden = NO;
         } else {
             ((id<CanvasObject>)[objects objectForKey:key]).hidden = YES;
@@ -266,6 +273,7 @@
     hasLayers = YES;
     //hasBlobs = YES;
     parts = 1;
+    hasScore = NO;
     clearOnReset = YES;
     prefsCondition = [NSCondition new];
     
@@ -660,7 +668,7 @@
                 [objects setObject:object forKey:[message.arguments objectAtIndex:0]];
                 [zOrder addObject:[message.arguments objectAtIndex:0]];
                 
-                if (!(partNumber == 0 || partNumber == currentPart)) {
+                if (!(currentPart == 0 || partNumber == 0 || partNumber == currentPart)) {
                     object.hidden = YES;
                 }
                 
@@ -997,7 +1005,7 @@
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qName attributes:(NSDictionary *)attributeDict
 {
-    if ([elementName isEqualToString:@"parts"] || [elementName isEqualToString:@"scriptfile"] || [elementName isEqualToString:@"clearonreset"]) {
+    if ([elementName isEqualToString:@"parts"] || [elementName isEqualToString:@"scriptfile"] || [elementName isEqualToString:@"clearonreset"] || [elementName isEqualToString:@"createscore"]) {
         isData = YES;
         currentString = nil;
     }
@@ -1025,6 +1033,11 @@
     } else if ([elementName isEqualToString:@"clearonreset"]) {
         if (currentString != nil && [currentString caseInsensitiveCompare:@"no"] == NSOrderedSame) {
             clearOnReset = NO;
+        }
+    } else if ([elementName isEqualToString:@"createscore"]) {
+        if (currentString != nil && [currentString caseInsensitiveCompare:@"yes"] == NSOrderedSame) {
+            hasScore = YES;
+            currentPart = 0;
         }
     }
     isData = NO;

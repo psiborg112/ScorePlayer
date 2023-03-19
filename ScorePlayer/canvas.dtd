@@ -2,3 +2,4 @@
 <!ELEMENT parts (#PCDATA)>
 <!ELEMENT scriptfile (#PCDATA)>
 <!ELEMENT clearonreset (#PCDATA)>
+<!ELEMENT createscore (#PCDATA)>
