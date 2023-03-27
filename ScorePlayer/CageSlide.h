@@ -18,7 +18,7 @@ typedef struct {
     NSInteger events;
 } Dot;
 
-static inline Line LineMake(x1, y1, x2, y2)
+static inline Line LineMake(CGFloat x1, CGFloat y1, CGFloat x2, CGFloat y2)
 {
     Line line;
     line.start.x = x1;
@@ -28,7 +28,7 @@ static inline Line LineMake(x1, y1, x2, y2)
     return line;
 }
 
-static inline Dot DotMake(x, y, number)
+static inline Dot DotMake(CGFloat x, CGFloat y, NSInteger number)
 {
     Dot dot;
     dot.location.x = x;

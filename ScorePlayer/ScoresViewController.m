@@ -1090,6 +1090,8 @@
             UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 if ([[identifierInputBox.textFields objectAtIndex:0].text length] != 0) {
                     self->identifier = [identifierInputBox.textFields objectAtIndex:0].text;
+                } else {
+                    self->identifier = self->deviceName;
                 }
                 //Wait for any current refresh operation to complete.
                 [self->refreshCondition lock];

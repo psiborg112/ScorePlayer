@@ -106,7 +106,11 @@ const NSInteger NETWORK_PROTOCOL_VERSION = 16;
     
     //If we don't have a manually assigned identifier (requested by the score) use the device name.
     if (ident == nil) {
-        identifier = [[UIDevice currentDevice] name];
+        if (@available(iOS 16.0, *)) {
+            identifier = [[[[NSProcessInfo processInfo] hostName] componentsSeparatedByString:@"."] objectAtIndex:0];
+        } else {
+            identifier = [[UIDevice currentDevice] name];
+        }
     } else {
         identifier = ident;
     }
