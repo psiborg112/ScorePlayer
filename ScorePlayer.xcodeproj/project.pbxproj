@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -1743,8 +1743,9 @@
 		AE17885A1585ED02005A7BCB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastTestingUpgradeCheck = 0510;
-				LastUpgradeCheck = 1410;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					AE1788621585ED02005A7BCB = {
 						DevelopmentTeam = L8FKNLG3XM;
@@ -2532,7 +2533,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.1.11;
+				CURRENT_PROJECT_VERSION = 2.1.12;
 				DEVELOPMENT_TEAM = L8FKNLG3XM;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScorePlayer/ScorePlayer-Prefix.pch";
@@ -2546,7 +2547,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ScorePlayer/ScorePlayer-Info.plist";
-				MARKETING_VERSION = 2.1.11;
+				MARKETING_VERSION = 2.1.12;
 				PRODUCT_BUNDLE_IDENTIFIER = WAAPA.Decibel.ScorePlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2561,7 +2562,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.1.11;
+				CURRENT_PROJECT_VERSION = 2.1.12;
 				DEVELOPMENT_TEAM = L8FKNLG3XM;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScorePlayer/ScorePlayer-Prefix.pch";
@@ -2574,7 +2575,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ScorePlayer/ScorePlayer-Info.plist";
-				MARKETING_VERSION = 2.1.11;
+				MARKETING_VERSION = 2.1.12;
 				PRODUCT_BUNDLE_IDENTIFIER = WAAPA.Decibel.ScorePlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2623,7 +2624,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.1.11;
+				CURRENT_PROJECT_VERSION = 2.1.12;
 				DEVELOPMENT_TEAM = 2U5GEXWGZZ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScorePlayer/ScorePlayer-Prefix.pch";
@@ -2637,7 +2638,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ScorePlayer/ScorePlayer-Info.plist";
-				MARKETING_VERSION = 2.1.11;
+				MARKETING_VERSION = 2.1.12;
 				PRODUCT_BUNDLE_IDENTIFIER = Decibel.ScorePlayer;
 				PRODUCT_NAME = "ScorePlayer (dev)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2652,7 +2653,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.1.11;
+				CURRENT_PROJECT_VERSION = 2.1.12;
 				DEVELOPMENT_TEAM = 2U5GEXWGZZ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScorePlayer/ScorePlayer-Prefix.pch";
@@ -2665,7 +2666,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ScorePlayer/ScorePlayer-Info.plist";
-				MARKETING_VERSION = 2.1.11;
+				MARKETING_VERSION = 2.1.12;
 				PRODUCT_BUNDLE_IDENTIFIER = Decibel.ScorePlayer;
 				PRODUCT_NAME = "ScorePlayer (dev)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

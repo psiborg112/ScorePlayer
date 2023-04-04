@@ -61,6 +61,7 @@
     BOOL resetViewOnSeek;
     BOOL hideEntireUI;
     BOOL hideStatusBar;
+    BOOL hideRendererElements;
     UITapGestureRecognizer *navigationTap;
     
     BOOL alertShown;
@@ -98,6 +99,7 @@
     self.navigationItem.rightBarButtonItem.enabled = NO;
     hideEntireUI = NO;
     hideStatusBar = NO;
+    hideRendererElements = NO;
     
     canvasScale = 1;
     canvasOffset = CGPointZero;
@@ -988,6 +990,11 @@
         
         [self dismissViewControllerAnimated:YES completion:nil];
         
+        //Check whether our renderer is hiding its UI elements.
+        if ([rendererDelegate respondsToSelector:@selector(hideUIElements)]) {
+            hideRendererElements = rendererDelegate.hideUIElements;
+        }
+        
         //Clean up the rendering delegate
         if ([rendererDelegate respondsToSelector:@selector(close)]) {
             [rendererDelegate close];
@@ -1050,6 +1057,11 @@
     playerCore.rendererDelegate = rendererDelegate;
     
     rendererAcceptsTick = [rendererDelegate respondsToSelector:@selector(tick:tock:noMoreClock:)];
+    
+    //If the renderer can hide elements of its UI, have our previous state persist.
+    if ([rendererDelegate respondsToSelector:@selector(setHideUIElements:)]) {
+        rendererDelegate.hideUIElements = hideRendererElements;
+    }
     
     //Check if the score has instructions, and enable or disable the instructions button.
     if (score.instructions != nil) {

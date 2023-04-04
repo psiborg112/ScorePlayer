@@ -458,7 +458,6 @@
         //Otherwise it's a fixed value
         readLineOffset = score.readLineOffset;
     }
-    readLine = [CALayer layer];
     //Keep the width of our reading line consistent between different screen sizes.
     //(Based on the original 1024 x 768 version.)
     readLine.frame = CGRectMake(0, 0, 4 * UIDelegate.cueLightScale, MAX(canvas.bounds.size.width, canvas.bounds.size.height));
@@ -545,6 +544,24 @@
 - (BOOL)detached
 {
     return detached;
+}
+
+- (void)setHideUIElements:(BOOL)hideUIElements
+{
+    hideReadLine = hideUIElements;
+    [CATransaction begin];
+    [CATransaction setDisableActions:YES];
+    if (hideReadLine) {
+        readLine.opacity = 0;
+    } else {
+        readLine.opacity = 1;
+    }
+    [CATransaction commit];
+}
+
+- (BOOL)hideUIElements
+{
+    return hideReadLine;
 }
 
 + (RendererFeatures)getRendererRequirements
@@ -641,7 +658,11 @@
     detached = NO;
     newMinimumSliderValue = 0;
     
-    //Load any advanced preferances if the necessary file exists
+    //Create our playhead here rather than with the rest of our layers so that it
+    //will definitely exist before the player attempts to hide it.
+    readLine = [CALayer layer];
+    
+    //Load any advanced preferances if the necessary file exists.
     
     if (score.prefsFile != nil) {
         NSString *prefsFile = [score.scorePath stringByAppendingPathComponent:score.prefsFile];

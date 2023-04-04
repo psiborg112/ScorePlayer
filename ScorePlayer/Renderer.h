@@ -107,6 +107,7 @@ static const NSInteger LOWER_PADDING = 52;
 
 @optional
 @property (nonatomic) BOOL detached;
+@property (nonatomic) BOOL hideUIElements;
 + (UIImage *)generateThumbnailForScore:(Score *)score ofSize:(CGSize)size;
 - (void)close;
 - (void)reset:(CGFloat *)locationOffset;
