@@ -676,7 +676,7 @@
     
     //Set up sidebar
     sideBar = [CALayer layer];
-    sideBar.frame = CGRectMake(0, -(UIDelegate.navigationHeight + UIDelegate.statusHeight), 150, 1068);
+    sideBar.frame = CGRectMake(0, -(UIDelegate.navigationHeight + UIDelegate.statusHeight), 150, 1024 + UIDelegate.navigationHeight + UIDelegate.statusHeight);
     //sideBar.backgroundColor = [UIColor colorWithRed:(123.0 / 255) green:(25.0 / 255) blue:(121.0 / 255) alpha:1].CGColor;
     sideBar.shadowOpacity = 1;
     NSString *titleFile = [[score.scorePath stringByAppendingPathComponent:[score.parts objectAtIndex:((Train *)[trains objectAtIndex:0]).assignedPart]] stringByDeletingPathExtension];
@@ -817,6 +817,7 @@
     UIDelegate.splitSecondMode = YES;
     UIDelegate.resetViewOnFinish = NO;
     [UIDelegate setMarginColour:[UIColor blackColor]];
+    [UIDelegate setCanvasMask:YES];
     
     score = scoreData;
     canvas = playerCanvas;
@@ -1120,6 +1121,7 @@
             [UIDelegate stopClockWithStateUpdate:YES];
             [self enableHighResTimer:NO];
             [canvas addSublayer:blackout];
+            [CATransaction flush];
             [CATransaction begin];
             [CATransaction setAnimationDuration:4];
             blackout.opacity = 1;
@@ -1132,6 +1134,7 @@
         //We're in timed mode. End and fade to black.
         [self enableHighResTimer:NO];
         [canvas addSublayer:blackout];
+        [CATransaction flush];
         [CATransaction begin];
         [CATransaction setAnimationDuration:4];
         blackout.opacity = 1;

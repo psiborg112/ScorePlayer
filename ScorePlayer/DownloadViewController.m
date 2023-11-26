@@ -65,6 +65,15 @@
     downloadDelegate = nil;
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    UIDeviceOrientation orientation = [UIDevice currentDevice].orientation;
+    if (UIDeviceOrientationIsPortrait(orientation) || UIDeviceOrientationIsLandscape(orientation)) {
+        videoPreviewLayer.connection.videoOrientation = (AVCaptureVideoOrientation)orientation;
+    }
+}
+
 - (IBAction)download {
     statusLabel.text = @"Downloading";
     [captureSession stopRunning];

@@ -67,6 +67,7 @@
 @property (nonatomic, readonly) NSInteger navigationHeight;
 @property (nonatomic, readonly) CGFloat canvasScale;
 @property (nonatomic, readonly) CGFloat cueLightScale;
+@property (nonatomic, readonly) CGFloat marginSize;
 
 - (IBAction)play;
 - (IBAction)reset;

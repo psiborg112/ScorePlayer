@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 53;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -34,6 +34,8 @@
 		AE178961158ADDD8005A7BCB /* Cage.m in Sources */ = {isa = PBXBuildFile; fileRef = AE178960158ADDD6005A7BCB /* Cage.m */; };
 		AE188E141AD5398900D11EA5 /* Loaded.m in Sources */ = {isa = PBXBuildFile; fileRef = AE188E131AD5398900D11EA5 /* Loaded.m */; };
 		AE1E7A601D83A5DE00973FD7 /* RodiniaEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1E7A5F1D83A5DE00973FD7 /* RodiniaEvent.m */; };
+		AE22A9472AC1B5E9006759E3 /* OverlayScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = AE22A9462AC1B5E9006759E3 /* OverlayScroller.m */; };
+		AE22A9492AC1C05B006759E3 /* OverlayScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = AE22A9462AC1B5E9006759E3 /* OverlayScroller.m */; };
 		AE22E8DB1F5932B10027B50B /* Radar.m in Sources */ = {isa = PBXBuildFile; fileRef = AE22E8DA1F5932B10027B50B /* Radar.m */; };
 		AE2744EB24361C36004EFC69 /* HPFOI_choir.png in Resources */ = {isa = PBXBuildFile; fileRef = AE2744EA24361C36004EFC69 /* HPFOI_choir.png */; };
 		AE2744EC24361C63004EFC69 /* HPFOI_choir.png in Resources */ = {isa = PBXBuildFile; fileRef = AE2744EA24361C36004EFC69 /* HPFOI_choir.png */; };
@@ -60,6 +62,8 @@
 		AE543E1E17EEACA2005D7061 /* Button.png in Resources */ = {isa = PBXBuildFile; fileRef = AE543E1C17EEACA2005D7061 /* Button.png */; };
 		AE543E1F17EEACA2005D7061 /* ButtonLarge.png in Resources */ = {isa = PBXBuildFile; fileRef = AE543E1D17EEACA2005D7061 /* ButtonLarge.png */; };
 		AE543E2617F83742005D7061 /* CageOptions.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE543E2517F83742005D7061 /* CageOptions.xib */; };
+		AE595C592AD3B33F0090A9F7 /* OverlayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE595C582AD3B33F0090A9F7 /* OverlayLayer.m */; };
+		AE595C5A2AD3B33F0090A9F7 /* OverlayLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = AE595C582AD3B33F0090A9F7 /* OverlayLayer.m */; };
 		AE5EEBF321B6AE73008453A6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE5EEBF221B6AE73008453A6 /* AVFoundation.framework */; };
 		AE61CA551728BB940045B48A /* BigClock.m in Sources */ = {isa = PBXBuildFile; fileRef = AE61CA541728BB930045B48A /* BigClock.m */; };
 		AE6429291A198D810068E5D8 /* OSCMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6429281A198D810068E5D8 /* OSCMessage.m */; };
@@ -648,6 +652,8 @@
 		AE188E131AD5398900D11EA5 /* Loaded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Loaded.m; sourceTree = "<group>"; };
 		AE1E7A5E1D83A5DE00973FD7 /* RodiniaEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RodiniaEvent.h; sourceTree = "<group>"; };
 		AE1E7A5F1D83A5DE00973FD7 /* RodiniaEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RodiniaEvent.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		AE22A9462AC1B5E9006759E3 /* OverlayScroller.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OverlayScroller.m; sourceTree = "<group>"; };
+		AE22A9482AC1B614006759E3 /* OverlayScroller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OverlayScroller.h; sourceTree = "<group>"; };
 		AE22E8D91F5932B10027B50B /* Radar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Radar.h; sourceTree = "<group>"; };
 		AE22E8DA1F5932B10027B50B /* Radar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Radar.m; sourceTree = "<group>"; };
 		AE2744EA24361C36004EFC69 /* HPFOI_choir.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = HPFOI_choir.png; path = HerPockets/HPFOI_choir.png; sourceTree = "<group>"; };
@@ -690,6 +696,8 @@
 		AE543E1C17EEACA2005D7061 /* Button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Button.png; sourceTree = "<group>"; };
 		AE543E1D17EEACA2005D7061 /* ButtonLarge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonLarge.png; sourceTree = "<group>"; };
 		AE543E2517F83742005D7061 /* CageOptions.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CageOptions.xib; sourceTree = "<group>"; };
+		AE595C572AD3B2DF0090A9F7 /* OverlayLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OverlayLayer.h; sourceTree = "<group>"; };
+		AE595C582AD3B33F0090A9F7 /* OverlayLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OverlayLayer.m; sourceTree = "<group>"; };
 		AE5EEBF221B6AE73008453A6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		AE61CA531728BB920045B48A /* BigClock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigClock.h; sourceTree = "<group>"; };
 		AE61CA541728BB930045B48A /* BigClock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BigClock.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -1457,6 +1465,10 @@
 				AE17892715887EF8005A7BCB /* ScrollScore.m */,
 				AE36143416703AC400BF0517 /* TiledScroller.h */,
 				AE36143516703AC400BF0517 /* TiledScroller.m */,
+				AE22A9482AC1B614006759E3 /* OverlayScroller.h */,
+				AE22A9462AC1B5E9006759E3 /* OverlayScroller.m */,
+				AE595C572AD3B2DF0090A9F7 /* OverlayLayer.h */,
+				AE595C582AD3B33F0090A9F7 /* OverlayLayer.m */,
 				AE671B0418B8633800AD3796 /* FadeScroller.h */,
 				AE671B0518B8633800AD3796 /* FadeScroller.m */,
 				AE0BACC71D3C7B0200182DAB /* LayeredScroller.h */,
@@ -1745,7 +1757,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastTestingUpgradeCheck = 0510;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					AE1788621585ED02005A7BCB = {
 						DevelopmentTeam = L8FKNLG3XM;
@@ -2261,6 +2273,7 @@
 				AE9F596B278CFAC400353897 /* mz_strm.c in Sources */,
 				AE522D3E15CEB0AE0010E39C /* Junction.m in Sources */,
 				AEB68DCF15D26D25002B8923 /* Mosaic.m in Sources */,
+				AE595C592AD3B33F0090A9F7 /* OverlayLayer.m in Sources */,
 				AE9F596D278CFAC400353897 /* mz_compat.c in Sources */,
 				AE36143616703AC400BF0517 /* TiledScroller.m in Sources */,
 				AECA277C1678DDB3006F7D94 /* AboutViewController.m in Sources */,
@@ -2283,6 +2296,7 @@
 				69B7A4D6211A99F800CDF4E3 /* CanvasText.m in Sources */,
 				AE6429291A198D810068E5D8 /* OSCMessage.m in Sources */,
 				AE61CA551728BB940045B48A /* BigClock.m in Sources */,
+				AE22A9472AC1B5E9006759E3 /* OverlayScroller.m in Sources */,
 				AE9F5967278CFAC400353897 /* mz_zip.c in Sources */,
 				AE9F597D278CFAC400353897 /* mz_strm_os_posix.c in Sources */,
 				AE86DAD723FEA19800A89852 /* PlayerCore.m in Sources */,
@@ -2350,6 +2364,7 @@
 				AE9F596C278CFAC400353897 /* mz_strm.c in Sources */,
 				AEED5E9A240DBF4600C3EA80 /* Junction.m in Sources */,
 				AEED5E9B240DBF4600C3EA80 /* Mosaic.m in Sources */,
+				AE595C5A2AD3B33F0090A9F7 /* OverlayLayer.m in Sources */,
 				AE9F596E278CFAC400353897 /* mz_compat.c in Sources */,
 				AEED5E9C240DBF4600C3EA80 /* TiledScroller.m in Sources */,
 				AEED5EA2240DBF4600C3EA80 /* AboutViewController.m in Sources */,
@@ -2372,6 +2387,7 @@
 				AEED5EB0240DBF4600C3EA80 /* CanvasText.m in Sources */,
 				AEED5EB1240DBF4600C3EA80 /* OSCMessage.m in Sources */,
 				AEED5EB2240DBF4600C3EA80 /* BigClock.m in Sources */,
+				AE22A9492AC1C05B006759E3 /* OverlayScroller.m in Sources */,
 				AE9F5968278CFAC400353897 /* mz_zip.c in Sources */,
 				AE9F597E278CFAC400353897 /* mz_strm_os_posix.c in Sources */,
 				AEED5EB3240DBF4600C3EA80 /* PlayerCore.m in Sources */,
@@ -2458,6 +2474,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -2509,6 +2526,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -2533,7 +2551,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.1.12;
+				CURRENT_PROJECT_VERSION = 2.1.13;
 				DEVELOPMENT_TEAM = L8FKNLG3XM;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScorePlayer/ScorePlayer-Prefix.pch";
@@ -2547,7 +2565,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ScorePlayer/ScorePlayer-Info.plist";
-				MARKETING_VERSION = 2.1.12;
+				MARKETING_VERSION = 2.1.13;
 				PRODUCT_BUNDLE_IDENTIFIER = WAAPA.Decibel.ScorePlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2562,7 +2580,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.1.12;
+				CURRENT_PROJECT_VERSION = 2.1.13;
 				DEVELOPMENT_TEAM = L8FKNLG3XM;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScorePlayer/ScorePlayer-Prefix.pch";
@@ -2575,7 +2593,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ScorePlayer/ScorePlayer-Info.plist";
-				MARKETING_VERSION = 2.1.12;
+				MARKETING_VERSION = 2.1.13;
 				PRODUCT_BUNDLE_IDENTIFIER = WAAPA.Decibel.ScorePlayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2624,7 +2642,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.1.12;
+				CURRENT_PROJECT_VERSION = 2.1.13;
 				DEVELOPMENT_TEAM = 2U5GEXWGZZ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScorePlayer/ScorePlayer-Prefix.pch";
@@ -2638,7 +2656,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ScorePlayer/ScorePlayer-Info.plist";
-				MARKETING_VERSION = 2.1.12;
+				MARKETING_VERSION = 2.1.13;
 				PRODUCT_BUNDLE_IDENTIFIER = Decibel.ScorePlayer;
 				PRODUCT_NAME = "ScorePlayer (dev)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2653,7 +2671,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2.1.12;
+				CURRENT_PROJECT_VERSION = 2.1.13;
 				DEVELOPMENT_TEAM = 2U5GEXWGZZ;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ScorePlayer/ScorePlayer-Prefix.pch";
@@ -2666,7 +2684,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ScorePlayer/ScorePlayer-Info.plist";
-				MARKETING_VERSION = 2.1.12;
+				MARKETING_VERSION = 2.1.13;
 				PRODUCT_BUNDLE_IDENTIFIER = Decibel.ScorePlayer;
 				PRODUCT_NAME = "ScorePlayer (dev)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

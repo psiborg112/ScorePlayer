@@ -105,6 +105,13 @@
     NSString *errorMessage;
     xmlLocation currentPrefs;
     
+    NSArray *arrayTags;
+    NSArray *dictionaryTags;
+    NSMutableArray *currentArray;
+    NSMutableDictionary *currentDictionary;
+    NSString *currentArrayTag;
+    NSString *currentDictionaryTag;
+    
     BOOL syncNextTick;
     
     __weak id<RendererUI> UIDelegate;
@@ -1276,6 +1283,23 @@
             isData = YES;
             currentString = nil;
         }
+    } else if (currentPrefs == kModule) {
+        //Currently an array can contain dictionaries, but not the other way around.
+        //(No other nesting is allowed.)
+        if ([arrayTags containsObject:elementName]) {
+            if (currentArray == nil && currentDictionary == nil) {
+                currentArray = [[NSMutableArray alloc] init];
+                currentArrayTag = elementName;
+            }
+        } else if ([dictionaryTags containsObject:elementName]) {
+            if (currentDictionary == nil) {
+                currentDictionary = [[NSMutableDictionary alloc] init];
+                currentDictionaryTag = elementName;
+            }
+        } else {
+            isData = YES;
+            currentString = nil;
+        }
     } else {
         isData = YES;
         currentString = nil;
@@ -1376,15 +1400,27 @@
         case kModule:
             if ([elementName isEqualToString:@"name"]) {
                 scrollerType = currentString;
+                //Check if any of our tags are used to define dictionaries or arrays
+                Class scrollerClass = NSClassFromString(scrollerType);
+                if (scrollerClass == nil || ![scrollerClass conformsToProtocol:@protocol(ScrollerDelegate)]) {
+                    //Flag our error here, and just check whether this flag is set when
+                    //returning to the top level later.
+                    badPrefs = YES;
+                    errorMessage = @"Invalid scroller type specified";
+                } else {
+                    if ([scrollerClass respondsToSelector:@selector(arrayTags)]) {
+                        arrayTags = [scrollerClass arrayTags];
+                    }
+                    if ([scrollerClass respondsToSelector:@selector(dictionaryTags)]) {
+                        dictionaryTags = [scrollerClass dictionaryTags];
+                    }
+                }
             } else if ([elementName isEqualToString:@"tiles"]) {
                 numberOfTiles = [currentString integerValue];
             } else if ([elementName isEqualToString:@"scrollermodule"]) {
                 //Perform necessary module checks.
                 Class scrollerClass = NSClassFromString(scrollerType);
-                if (scrollerClass == nil || ![scrollerClass conformsToProtocol:@protocol(ScrollerDelegate)]) {
-                    badPrefs = YES;
-                    errorMessage = @"Invalid scroller type specified";
-                } else {
+                if (!badPrefs) {
                     NSArray *requiredOptions = [scrollerClass requiredOptions];
                     for (int i = 0; i < [requiredOptions count]; i++) {
                         if (![scrollerOptions objectForKey:[requiredOptions objectAtIndex:i]]) {
@@ -1404,7 +1440,29 @@
                 if (scrollerOptions == nil) {
                     scrollerOptions = [[NSMutableDictionary alloc] init];
                 }
-                [scrollerOptions setObject:[NSString stringWithString:currentString] forKey:elementName];
+                //First check if we're dealing with any nested options
+                if (currentDictionary != nil) {
+                    if ([elementName isEqualToString:currentDictionaryTag]) {
+                        if (currentArray != nil) {
+                            [currentArray addObject:[NSDictionary dictionaryWithDictionary:currentDictionary]];
+                        } else {
+                            [scrollerOptions setObject:[NSDictionary dictionaryWithDictionary:currentDictionary] forKey:elementName];
+                        }
+                        currentDictionary = nil;
+                    } else {
+                        [currentDictionary setObject:[NSString stringWithString:currentString] forKey:elementName];
+                    }
+                } else if (currentArray != nil) {
+                    if ([elementName isEqualToString:currentArrayTag]) {
+                        [scrollerOptions setObject:[NSArray arrayWithArray:currentArray] forKey:elementName];
+                        currentArray = nil;
+                    } else {
+                        [currentArray addObject:[NSString stringWithString:currentString]];
+                    }
+                } else {
+                    //Otherwise just add at the base level of our dictionary
+                    [scrollerOptions setObject:[NSString stringWithString:currentString] forKey:elementName];
+                }
             }
             break;
             

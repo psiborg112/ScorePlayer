@@ -78,6 +78,7 @@ static const NSInteger LOWER_PADDING = 52;
 @property (nonatomic, readonly) NSInteger navigationHeight;
 @property (nonatomic, readonly) CGFloat canvasScale;
 @property (nonatomic, readonly) CGFloat cueLightScale;
+@property (nonatomic, readonly) CGFloat marginSize;
 - (void)setStaticScoreUI;
 - (void)setDynamicScoreUI;
 - (void)hideNavigationBar;
@@ -86,6 +87,7 @@ static const NSInteger LOWER_PADDING = 52;
 - (void)resetClockWithUIUpdate:(BOOL)updateUI;
 - (void)setPlayerBackgroundColour:(UIColor *)colour;
 - (void)setMarginColour:(UIColor *)colour;
+- (void)setCanvasMask:(BOOL)mask;
 - (void)partChangedToPart:(NSUInteger)part;
 
 @end

@@ -61,6 +61,10 @@ typedef enum {
 @property (nonatomic, strong) NSString *annotationsDirectory;
 @property (nonatomic) CGSize canvasSize;
 @property (nonatomic) ScrollOrientation orientation;
+
++ (NSArray *)arrayTags;
++ (NSArray *)dictionaryTags;
+
 - (OSCMessage *)getData;
 - (void)setData:(OSCMessage *)data;
 - (void)tick:(int)progress tock:(int)splitSecond noMoreClock:(BOOL)finished;
@@ -78,5 +82,6 @@ typedef enum {
 
 @property (nonatomic) BOOL isMaster;
 @property (nonatomic) BOOL detached;
+@property (nonatomic) BOOL hideUIElements;
 
 @end

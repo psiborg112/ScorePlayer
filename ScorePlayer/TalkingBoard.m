@@ -33,6 +33,7 @@ const NSInteger HEADER_LENGTH = 7;
     Score *score;
     CALayer *canvas;
     CALayer *blackout;
+    BOOL isFading;
     
     NSInteger screenWidth;
     NSInteger screenHeight;
@@ -701,6 +702,7 @@ const NSInteger HEADER_LENGTH = 7;
     seekNotRequired = NO;
     awaitingSeek = NO;
     [UIDelegate setMarginColour:[UIColor blackColor]];
+    [UIDelegate setCanvasMask:YES];
     
     score = scoreData;
     canvas = playerCanvas;
@@ -750,6 +752,7 @@ const NSInteger HEADER_LENGTH = 7;
     backgroundAdjust = 0;
     didLeap = NO;
     didSeek = NO;
+    isFading = NO;
     
     for (int i = 0; i < maxPlanchettes; i++) {
         planchetteIndex[i] = 0;
@@ -1018,7 +1021,8 @@ const NSInteger HEADER_LENGTH = 7;
     }
     
     //Start fade to black if needed.
-    if (progress == UIDelegate.clockDuration - 5) {
+    if (!isFading && (progress >= UIDelegate.clockDuration - 5)) {
+        isFading = YES;
         [CATransaction begin];
         [CATransaction setAnimationDuration:5];
         blackout.opacity = 1;

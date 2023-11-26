@@ -111,7 +111,6 @@
     //Set up our canvas
     canvas = [CALayer layer];
     canvas.anchorPoint = CGPointMake(0, 0);
-    canvas.masksToBounds = NO;
     [canvasView.layer addSublayer:canvas];
     useScaledCanvas = YES;
     annotating = NO;
@@ -316,6 +315,15 @@
 - (UIRectEdge)preferredScreenEdgesDeferringSystemGestures
 {
     return UIRectEdgeBottom;
+}
+
+- (CGFloat)marginSize
+{
+    if (canvasOffset.x > canvasOffset.y) {
+        return ceilf(canvasOffset.x);
+    } else {
+        return ceilf(canvasOffset.y);
+    }
 }
 
 - (IBAction)play
@@ -1026,6 +1034,7 @@
     
     allowClockVisibilityChange = NO;
     canAnnotate = NO;
+    canvas.masksToBounds = NO;
     
     if (playerCore.clockDuration > 0) {
         clockVisible = YES;
@@ -1473,6 +1482,11 @@
 - (void)setMarginColour:(UIColor *)colour
 {
     canvasView.backgroundColor = colour;
+}
+
+- (void)setCanvasMask:(BOOL)mask
+{
+    canvas.masksToBounds = mask;
 }
 
 - (void)partChangedToPart:(NSUInteger)part
